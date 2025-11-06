@@ -1,0 +1,19 @@
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Archivos de entorno o configuración local
+.env
+.vscode/
+.idea/
+
+# Archivos de sistema (macOS)
+.DS_Store
+
+# Archivos de Jupyter
+*.ipynb_checkpoints
+
+# Carpeta de salida o builds
+/output/
+/dist/
+/build/
