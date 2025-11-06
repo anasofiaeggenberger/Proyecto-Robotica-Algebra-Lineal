@@ -36,3 +36,28 @@ class RobotArm:
             points.append((x, y))
 
         return points
+
+    def show_transformations(self):
+        """
+        Muestra paso a paso las matrices de rotación y los puntos calculados.
+        """
+        print("\n=== MATRICES DE TRANSFORMACIÓN Y POSICIONES ===")
+        x, y, total_angle = 0, 0, 0
+
+        for i, (L, theta) in enumerate(zip(self.lengths, self.angles), start=1):
+            total_angle += theta
+            R = np.array([
+                [np.cos(total_angle), -np.sin(total_angle)],
+                [np.sin(total_angle),  np.cos(total_angle)]
+            ])
+            x += L * np.cos(total_angle)
+            y += L * np.sin(total_angle)
+
+            print(f"\n→ Articulación {i}")
+            print("Ángulo acumulado:", np.rad2deg(total_angle))
+            print("Matriz de rotación:")
+            print(np.round(R, 3))
+            print(f"Posición final parcial: ({x:.2f}, {y:.2f})")
+
+        print("\nPosición final del efector:", (round(x, 2), round(y, 2)))
+        print("==============================================")

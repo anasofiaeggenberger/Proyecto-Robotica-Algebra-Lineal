@@ -2,18 +2,20 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 def draw_robot(points, ax):
-    """
-    Dibuja el brazo robótico a partir de una lista de puntos [(x0,y0), ..., (xn,yn)].
-    """
     xs, ys = zip(*points)
     ax.clear()
-    ax.plot(xs, ys, '-o', linewidth=3, markersize=8, color='royalblue')
-    ax.set_xlim(-sum([abs(x) for x in xs]) - 1, sum([abs(x) for x in xs]) + 1)
-    ax.set_ylim(-sum([abs(y) for y in ys]) - 1, sum([abs(y) for y in ys]) + 1)
-    ax.set_xlabel("Eje X")
-    ax.set_ylabel("Eje Y")
-    ax.set_title("Simulación del Brazo Robótico (Álgebra Lineal)")
-    ax.grid(True)
+
+    ax.plot(xs, ys, '-o', linewidth=4, markersize=8, color='#0077ff')
+
+    ax.plot(xs[-1], ys[-1], 'ro', markersize=10)
+    ax.text(xs[-1] + 0.1, ys[-1] + 0.1, 'Efector final', color='red', fontsize=10)
+
+    ax.set_xlim(-8, 8)
+    ax.set_ylim(-8, 8)
+    ax.set_xlabel("Eje X", fontsize=10)
+    ax.set_ylabel("Eje Y", fontsize=10)
+    ax.set_title("Simulación de Brazo Robótico (Álgebra Lineal)", fontsize=12)
+    ax.grid(True, linestyle='--', alpha=0.5)
     ax.set_aspect('equal')
 
 def animate_robot(arm, sequence):
