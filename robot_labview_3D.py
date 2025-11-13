@@ -86,15 +86,13 @@ def animate_robot_3D():
     ax_text = fig.add_subplot(122)
     plt.subplots_adjust(wspace=0.3)
 
-    # --- CONFIGURACIÓN DEL BRAZO ---
     lengths = [2.5, 2.0, 1.5]
-    frames = 361  # 0 a 360 grados exactos
+    frames = 366
     angles_sequence = [
         [t, np.sin(t / 30) * 60, np.cos(t / 25) * 45]
         for t in np.linspace(0, 360, frames, endpoint=True)
     ]
 
-    # --- CONFIGURACIÓN VISUAL ---
     ax.set_xlim(-6, 6)
     ax.set_ylim(-6, 6)
     ax.set_zlim(-2, 6)
@@ -109,19 +107,17 @@ def animate_robot_3D():
     fontweight="bold",
 )
     title.set_path_effects([
-    path_effects.Stroke(linewidth=4, foreground="#02121A"),  # “aura” detrás
+    path_effects.Stroke(linewidth=4, foreground="#02121A"),  
     path_effects.Normal()
 ])
-    ax.view_init(elev=25, azim=35)  # fija, estable
+    ax.view_init(elev=25, azim=35)  
     ax.grid(True, linestyle="--", alpha=0.2)
     ax.set_facecolor("#050608")
 
-    # --- ELEMENTOS VISUALES ---
     line, = ax.plot([], [], [], "-o", lw=3, color="#00CFFF", markersize=8)
     trail, = ax.plot([], [], [], color="white", lw=1.5, alpha=0.7)
     effector_point = None
 
-    # --- PANEL DERECHO ---
     ax_text.set_facecolor((0.03, 0.04, 0.08, 0.9))
     for s in ax_text.spines:
         ax_text.spines[s].set_color("#00CFFF")
@@ -174,7 +170,6 @@ def animate_robot_3D():
             text, _ = analyze_frame(frame_input, angles_sequence, lengths)
             print("\n" + text + "\n")
             text_display.set_text(text)
-            print("\n🟢 La ventana permanecerá abierta hasta que la cierres manualmente.\n")
             plt.show(block=True)
 
         return line, trail, text_display, effector_point
